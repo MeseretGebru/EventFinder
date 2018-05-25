@@ -1,0 +1,6 @@
+framework module Pods_EventFinderForFamilies {
+  umbrella header "Pods-EventFinderForFamilies-umbrella.h"
+
+  export *
+  module * { export * }
+}
