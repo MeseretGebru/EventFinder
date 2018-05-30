@@ -1,16 +1,15 @@
 //
-//  SearchViewController.swift
+//  CategoryViewController.swift
 //  EventFinderForFamilies
 //
-//  Created by C4Q on 5/23/18.
+//  Created by C4Q on 5/26/18.
 //  Copyright © 2018 C4Q. All rights reserved.
 //
 
 import UIKit
-import SnapKit
 
 class CategoryViewController: UIViewController {
-    
+
     let categoryView = CategoryView()
     let cellSpacing: CGFloat = 5.0
     var categories = [Category](){
@@ -23,11 +22,14 @@ class CategoryViewController: UIViewController {
         super.viewDidLoad()
         categoryView.collectionView.dataSource = self
         categoryView.collectionView.delegate = self
-        view.backgroundColor = .orange
+        view.backgroundColor = Stylesheet.Colors.Lapislazuli
+        setUpNavBar()
         setupView()
         loadData()
     }
-
+    func setUpNavBar(){
+        navigationItem.title = "Event Category"
+    }
     func setupView(){
         view.addSubview(categoryView)
         categoryView.snp.makeConstraints { (make) in
@@ -47,7 +49,7 @@ extension CategoryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventsCell", for: indexPath) as! CategoryCollectionViewCell
         if indexPath.row % 2 == 0 {
@@ -90,8 +92,11 @@ extension CategoryViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let locationVC = LocationViewController()
-    
-    navigationController?.pushViewController(locationVC, animated: false)
+        let locationVC = TempLocationViewController() //UpComingEventsViewController()
+        
+        
+         //locationVC.idCategory = categories[indexPath.row].id
+        navigationController?.pushViewController(locationVC, animated: false)
     }
 }
+

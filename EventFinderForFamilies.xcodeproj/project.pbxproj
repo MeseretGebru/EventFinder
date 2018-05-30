@@ -8,13 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		7070DC5318631FD701F99574 /* Pods_EventFinderForFamilies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97EB13F076CDEE86D9BAC844 /* Pods_EventFinderForFamilies.framework */; };
+		8132AF0720BDEE41008FCE5C /* UpComingEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8132AF0620BDEE41008FCE5C /* UpComingEventsViewController.swift */; };
+		8132AF0920BE0094008FCE5C /* UpComingEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8132AF0820BE0094008FCE5C /* UpComingEventView.swift */; };
+		8132AF0B20BE031D008FCE5C /* UpComingEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8132AF0A20BE031D008FCE5C /* UpComingEventTableViewCell.swift */; };
+		8132AF0D20BE164C008FCE5C /* LocationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8132AF0C20BE164C008FCE5C /* LocationServices.swift */; };
+		8132AF0F20BE176F008FCE5C /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8132AF0E20BE176F008FCE5C /* UserDefaults.swift */; };
 		81530DFA20B517BF00B659B8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81530DF920B517BF00B659B8 /* LoginView.swift */; };
 		81530DFE20B5CFE500B659B8 /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81530DFD20B5CFE500B659B8 /* Stylesheet.swift */; };
-		81530E0020B5F67000B659B8 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81530DFF20B5F67000B659B8 /* EventViewController.swift */; };
 		81530E0220B60C7300B659B8 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81530E0120B60C7300B659B8 /* CategoryCollectionViewCell.swift */; };
 		81530E0420B6107100B659B8 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81530E0320B6107100B659B8 /* CategoryView.swift */; };
 		81530E0620B6661800B659B8 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81530E0520B6661800B659B8 /* LocationViewController.swift */; };
-		81530E0820B6663100B659B8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81530E0720B6663100B659B8 /* Location.swift */; };
 		81530E0C20B85A3D00B659B8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81530E0B20B85A3D00B659B8 /* Category.swift */; };
 		81DB31A720AC8D0800D3594D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DB31A620AC8D0800D3594D /* AppDelegate.swift */; };
 		81DB31A920AC8D0800D3594D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DB31A820AC8D0800D3594D /* LoginViewController.swift */; };
@@ -29,18 +32,24 @@
 		81EC05DC20B8BDD300FF7AA7 /* ImageServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EC05DB20B8BDD300FF7AA7 /* ImageServices.swift */; };
 		81EC05DE20B8C70F00FF7AA7 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EC05DD20B8C70F00FF7AA7 /* Event.swift */; };
 		81EC05E020B8CCC900FF7AA7 /* EventAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EC05DF20B8CCC900FF7AA7 /* EventAPIClient.swift */; };
+		81EC05E220B9CC0400FF7AA7 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EC05E120B9CC0400FF7AA7 /* CategoryViewController.swift */; };
+		81EC05E420B9D89800FF7AA7 /* TempLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EC05E320B9D89800FF7AA7 /* TempLocationViewController.swift */; };
+		81EC05E620B9DA4D00FF7AA7 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EC05E520B9DA4D00FF7AA7 /* LocationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0AF783B535DFF3B2CD6C92B9 /* Pods-EventFinderForFamilies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventFinderForFamilies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EventFinderForFamilies/Pods-EventFinderForFamilies.debug.xcconfig"; sourceTree = "<group>"; };
 		272F5174AFDA89730E09E527 /* Pods-EventFinderForFamilies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventFinderForFamilies.release.xcconfig"; path = "Pods/Target Support Files/Pods-EventFinderForFamilies/Pods-EventFinderForFamilies.release.xcconfig"; sourceTree = "<group>"; };
+		8132AF0620BDEE41008FCE5C /* UpComingEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpComingEventsViewController.swift; sourceTree = "<group>"; };
+		8132AF0820BE0094008FCE5C /* UpComingEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpComingEventView.swift; sourceTree = "<group>"; };
+		8132AF0A20BE031D008FCE5C /* UpComingEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpComingEventTableViewCell.swift; sourceTree = "<group>"; };
+		8132AF0C20BE164C008FCE5C /* LocationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServices.swift; sourceTree = "<group>"; };
+		8132AF0E20BE176F008FCE5C /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		81530DF920B517BF00B659B8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		81530DFD20B5CFE500B659B8 /* Stylesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
-		81530DFF20B5F67000B659B8 /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		81530E0120B60C7300B659B8 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		81530E0320B6107100B659B8 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		81530E0520B6661800B659B8 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
-		81530E0720B6663100B659B8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		81530E0B20B85A3D00B659B8 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		81DB31A320AC8D0800D3594D /* EventFinderForFamilies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventFinderForFamilies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81DB31A620AC8D0800D3594D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +66,9 @@
 		81EC05DB20B8BDD300FF7AA7 /* ImageServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServices.swift; sourceTree = "<group>"; };
 		81EC05DD20B8C70F00FF7AA7 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		81EC05DF20B8CCC900FF7AA7 /* EventAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAPIClient.swift; sourceTree = "<group>"; };
+		81EC05E120B9CC0400FF7AA7 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		81EC05E320B9D89800FF7AA7 /* TempLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempLocationViewController.swift; sourceTree = "<group>"; };
+		81EC05E520B9DA4D00FF7AA7 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		97EB13F076CDEE86D9BAC844 /* Pods_EventFinderForFamilies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EventFinderForFamilies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -85,8 +97,6 @@
 		81530E0920B859E400B659B8 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				81EC05D520B8A7AF00FF7AA7 /* CategoryAPIClient.swift */,
-				81EC05DF20B8CCC900FF7AA7 /* EventAPIClient.swift */,
 				81EC05DB20B8BDD300FF7AA7 /* ImageServices.swift */,
 				81EC05D920B8A8C900FF7AA7 /* NetworkHelper.swift */,
 			);
@@ -96,6 +106,10 @@
 		81530E0A20B859F100B659B8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				81EC05D520B8A7AF00FF7AA7 /* CategoryAPIClient.swift */,
+				81EC05DF20B8CCC900FF7AA7 /* EventAPIClient.swift */,
+				8132AF0C20BE164C008FCE5C /* LocationServices.swift */,
+				8132AF0E20BE176F008FCE5C /* UserDefaults.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -103,6 +117,8 @@
 		81530E0D20B85A8200B659B8 /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
+				81530E0120B60C7300B659B8 /* CategoryCollectionViewCell.swift */,
+				8132AF0A20BE031D008FCE5C /* UpComingEventTableViewCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -149,8 +165,10 @@
 			isa = PBXGroup;
 			children = (
 				81DB31A820AC8D0800D3594D /* LoginViewController.swift */,
-				81530DFF20B5F67000B659B8 /* EventViewController.swift */,
+				81EC05E120B9CC0400FF7AA7 /* CategoryViewController.swift */,
 				81530E0520B6661800B659B8 /* LocationViewController.swift */,
+				81EC05E320B9D89800FF7AA7 /* TempLocationViewController.swift */,
+				8132AF0620BDEE41008FCE5C /* UpComingEventsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -160,8 +178,8 @@
 			children = (
 				81530DF920B517BF00B659B8 /* LoginView.swift */,
 				81530E0320B6107100B659B8 /* CategoryView.swift */,
-				81530E0120B60C7300B659B8 /* CategoryCollectionViewCell.swift */,
-				81530E0720B6663100B659B8 /* Location.swift */,
+				81EC05E520B9DA4D00FF7AA7 /* LocationView.swift */,
+				8132AF0820BE0094008FCE5C /* UpComingEventView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -317,22 +335,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8132AF0D20BE164C008FCE5C /* LocationServices.swift in Sources */,
 				81EC05DA20B8A8C900FF7AA7 /* NetworkHelper.swift in Sources */,
-				81530E0020B5F67000B659B8 /* EventViewController.swift in Sources */,
+				8132AF0B20BE031D008FCE5C /* UpComingEventTableViewCell.swift in Sources */,
+				8132AF0720BDEE41008FCE5C /* UpComingEventsViewController.swift in Sources */,
 				81EC05DC20B8BDD300FF7AA7 /* ImageServices.swift in Sources */,
 				81530E0C20B85A3D00B659B8 /* Category.swift in Sources */,
 				81DB31A920AC8D0800D3594D /* LoginViewController.swift in Sources */,
-				81530E0820B6663100B659B8 /* Location.swift in Sources */,
+				81EC05E420B9D89800FF7AA7 /* TempLocationViewController.swift in Sources */,
 				81EC05D820B8A86B00FF7AA7 /* AppError.swift in Sources */,
 				81DB31A720AC8D0800D3594D /* AppDelegate.swift in Sources */,
 				81EC05E020B8CCC900FF7AA7 /* EventAPIClient.swift in Sources */,
+				8132AF0920BE0094008FCE5C /* UpComingEventView.swift in Sources */,
 				81EC05DE20B8C70F00FF7AA7 /* Event.swift in Sources */,
 				81EC05D620B8A7AF00FF7AA7 /* CategoryAPIClient.swift in Sources */,
+				8132AF0F20BE176F008FCE5C /* UserDefaults.swift in Sources */,
 				81530DFE20B5CFE500B659B8 /* Stylesheet.swift in Sources */,
 				81530E0220B60C7300B659B8 /* CategoryCollectionViewCell.swift in Sources */,
 				81530DFA20B517BF00B659B8 /* LoginView.swift in Sources */,
 				81530E0620B6661800B659B8 /* LocationViewController.swift in Sources */,
 				81DB31AF20AC8D0800D3594D /* EventFinderForFamilies.xcdatamodeld in Sources */,
+				81EC05E220B9CC0400FF7AA7 /* CategoryViewController.swift in Sources */,
+				81EC05E620B9DA4D00FF7AA7 /* LocationView.swift in Sources */,
 				81530E0420B6107100B659B8 /* CategoryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

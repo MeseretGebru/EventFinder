@@ -1,5 +1,5 @@
 //
-//  EventView.swift
+//  CategoryView.swift
 //  EventFinderForFamilies
 //
 //  Created by C4Q on 5/23/18.
@@ -14,7 +14,7 @@ class CategoryView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
-        cv.backgroundColor = UIColor.yellow //
+        cv.backgroundColor = UIColor.lightGray//
         cv.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: "EventsCell")
         cv.setContentCompressionResistancePriority(UILayoutPriority(249), for: .vertical)
         return cv

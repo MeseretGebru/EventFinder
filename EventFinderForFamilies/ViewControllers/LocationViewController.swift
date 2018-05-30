@@ -12,81 +12,144 @@ import SnapKit
 import CoreLocation
 
 
-class LocationViewController: UIViewController, CLLocationManagerDelegate {
-
-    let locationManager = CLLocationManager()
+class LocationViewController: UIViewController {
+ /*   let locationView = LocationView()
+//    var currentSelectedEvent = Event!
+    
     private var annotations = [MKAnnotation]()
     var pinAnnotationView: MKPinAnnotationView!
-
-    lazy var mapView: MKMapView = {
-        let map = MKMapView()
-        map.mapType = .standard
-        map.showsUserLocation = true
-        return map
-    }()
+    
+    var currentSelectedIndex: Int = 0 {
+        didSet{
+            //let titleAtSelectedIndex = locationView//boroughArray[currentSelectedIndex]
+            let loadEvents: ([Event]) -> Void = {(onlineEvents:[Event]) in
+                DispatchQueue.main.async {
+                    self.events.removeAll()
+                    self.locationView.mapView.removeAnnotations(self.annotations)
+                    self.annotations.removeAll()
+                    self.events = onlineEvents
+                    if self.events.isEmpty{
+                        self.noEventAlert()
+                    }
+                }
+            }
+            EventAPIClient.manager.getEvents(catId: 22, lat: eventLatitude, lon: eventLongitude, radius: 50, completionHandler: onlineEvent, errorHandler: {print($0)})
+                
+                
+                        }
+    }
+    
+    var events = [Event](){
+        didSet{
+            // creating annotations
+            for event in events {
+                guard let eventLatitude = event.venue?.lat,
+                    let eventLongitude = event.venue?.lon ,
+                 //   let doubleLat = eventLatitude,
+                  //  let doubleLong = eventLongitude else {continue}
+                
+      //          let annotation = MKPointAnnotation()
+      //          annotation.coordinate = CLLocationCoordinate2DMake(doubleLat, doubleLong)
+    //            annotation.title = event.name //this is the name that will show right unser the pin
+     //           annotations.append(annotation)
+            }
+            // adding annotations to mapview - update ui
+            DispatchQueue.main.async {
+                self.locationView.mapView.addAnnotations(self.annotations)
+                self.locationView.mapView.showAnnotations(self.annotations, animated: true)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addSubView()
-        locationManager.delegate = self
-        showSampleData()
-    }
-    
-    func centerMapOnLocation(location: CLLocation) {
-        let regionRadius: CLLocationDistance = 1000
+        view.addSubview(locationView)
+        setupNavBar()
+        askUserForPermission()
+        locationView.mapView.delegate = self
         
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius, regionRadius)
-        
-        mapView.setRegion(coordinateRegion, animated: true)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        checkLocationAuthorizationStatus()
-    }
-    
-    func showSampleData() {
-        //you might have some function to pull this in
-        // someArrayofVenues
-        // iterate through that list to turn each event.venue into a pin
-        
-        let venue = ["lat": 40.7851676940918, "lon": -73.94332122802734]
-        
-        let newAnnotation = MKPointAnnotation()
-        newAnnotation.coordinate = CLLocationCoordinate2DMake(venue["lat"]!, venue["lon"]!)
-        newAnnotation.title = "@ C4Q WITH CAM!"
-        mapView.addAnnotation(newAnnotation)
-    
-        
-        //this is just to center the map on our test point
-        var testLocation = CLLocation(latitude: venue["lat"]!, longitude: venue["lon"]!)
-        centerMapOnLocation(location: testLocation)
         
     }
     
-    private func loadData() {
+    
+    func askUserForPermission(){
+        let _ = LocationService.manager.checkForLocationServices()
+    }
+    
+    func setupNavBar(){
+        navigationItem.title = "One-Stop-Shop"
+        //Add right bar button
         
     }
-    
-    func addSubView(){
-        view.addSubview(mapView)
-        mapView.snp.makeConstraints { (make) in
-            make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
-        }
-    }
-    
-    //To check if the user has granted permissions to use their current location
-    func checkLocationAuthorizationStatus() {
-        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-            mapView.showsUserLocation = true
-            showSampleData()
-//            centerMapOnLocation(location: locationManager.location!)
-        } else {
-            locationManager.requestWhenInUseAuthorization()
-        }
-    }
-    
+}
 
-    
 
+//MARK: Maps delegate functions
+extension LocationViewController: MKMapViewDelegate{
+    
+    //similar to cell for row at in table view
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        //setting up annotation views
+        
+        //setting up the blue dot
+        if annotation is MKUserLocation{
+            return nil
+        }
+        
+        // setup annotation view for map
+        // we can fully customize the marker annotation view
+        var eventAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "EventAnnotationView") //MKMarkerAnnotationView -> the view on top of the pin
+        
+        //if there is no annotation view, create a new one
+        if eventAnnotationView == nil {
+            eventAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "EventAnnotationView")
+            eventAnnotationView?.canShowCallout = true
+            
+            let index = annotations.index{$0 === annotation}
+            
+            if let annotationIndex = index {
+                //let jobCenter = jobCenters[annotationIndex]
+    //            eventAnnotationView?.glyphText =
+                //jobCenterAnnotationView?.image = #imageLiteral(resourceName: "orangeImage").reDrawImage(using: CGSize(width: 50, height: 50))//image is there.. It's just greyed out
+                eventAnnotationView?.contentMode = .scaleAspectFit
+            }
+            eventAnnotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        else {
+            eventAnnotationView?.annotation = annotation
+        }
+        //TODO: For later: setting jobCenterAnnotationView's image
+        return eventAnnotationView
+    }
+    
+    
+    //similar to didSelect in tableviews
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        //find the place selected and set that place to be the current place
+        let index = annotations.index{$0 === view.annotation}
+        guard let annotationIndex = index else { print("index is nil"); return }
+        let event = events[annotationIndex]
+ //       currentSelectedEvent = event
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        //present the detail view controller
+//        let detailVC = DetailViewController(jobCenter: currentSelectedJobCenter)
+//        navigationController?.pushViewController(detailVC, animated: true)
+//        print("This is going to the List View Controller")
+    }
+}
+
+//MARK: alerts
+extension LocationViewController {
+    func noEventAlert(){
+        let alertController = UIAlertController(title: "No Job Centers",
+                                                message:"There are no job centers in this zipcode. Please search another zipcode",
+                                                preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) //for other actions add in actions incompletion{}
+        alertController.addAction(okAction)
+        //present alert controller
+        self.present(alertController, animated: true, completion: nil)
+    }
+    */
 }

@@ -11,7 +11,7 @@ struct EventAPIClient {
     private init() {}
     static let manager = EventAPIClient()
     
-    func getCategory(catId: Int,
+    func getEvents(catId: Int,
                      lat: Double,
                      lon: Double,
                      radius: Double,
@@ -19,6 +19,7 @@ struct EventAPIClient {
                      errorHandler: @escaping (Error) -> Void) {
         let apiKey = "3a612e136496614244d36d41732920"
         let fullUrlStr = "https://api.meetup.com/find/upcoming_events/?topic_category=\(catId)&lat=\(lat)&lon=\(lon)&radius=\(radius)&key=\(apiKey)"
+        //https://api.meetup.com/find/upcoming_events/?topic_category=542&key=3a612e136496614244d36d41732920
         guard let url = URL(string: fullUrlStr) else {errorHandler(AppError.badURL(str: fullUrlStr))
             return
         }

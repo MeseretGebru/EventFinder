@@ -11,17 +11,18 @@ struct AllEvent : Codable {
     let events: [Event]
 }
 struct Event : Codable {
-    let created: Int
-    let fee : Fee
-    let venue : Venue
-    let gruoup : Group
-    let id: Int
+    let created: Int?
+    let fee : Fee?
+    let venue : Venue?
+    let group : Group
+    let id: String
     let name : String
-    let status: String
-    let local_date: String
-    let local_time: String
+    let status: String?
+    let local_date: String?
+    let local_time: String?
     let link : String
-    let description: String
+    let description: String?
+    
 }
 struct Fee : Codable {
     let accepts : String
@@ -30,12 +31,12 @@ struct Fee : Codable {
 struct Venue: Codable {
     let id : Int
     let name : String
-    let lat : Int
-    let lon : Int
+    let lat : Double
+    let lon : Double
     let address_1: String
     let city: String
-    let zip : String
-    let state:String
+    let zip : String?
+    let state:String?
 }
 struct Group :Codable {
     let created: Int
