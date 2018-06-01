@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class CategoryViewController: UIViewController {
 
@@ -73,7 +74,7 @@ extension CategoryViewController: UICollectionViewDelegateFlowLayout {
         let numSpaces: CGFloat = numCells + 1
         
         let screenWidth = UIScreen.main.bounds.width
-        let screenHeight = UIScreen.main.bounds.height / 3
+        //let screenHeight = UIScreen.main.bounds.height / 3
         let cellWidth = (screenWidth - (cellSpacing * numSpaces)) / numCells
         
         return CGSize(width: cellWidth, height: cellWidth)
@@ -92,10 +93,10 @@ extension CategoryViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let locationVC = TempLocationViewController() //UpComingEventsViewController()
+        let locationVC = UpComingEventsViewController() ////LocationViewController()/
         
         
-         //locationVC.idCategory = categories[indexPath.row].id
+        locationVC.idCategory = categories[indexPath.row].id
         navigationController?.pushViewController(locationVC, animated: false)
     }
 }

@@ -55,9 +55,8 @@ class TempLocationViewController: UIViewController,  CLLocationManagerDelegate {
         newAnnotation.title = "@ C4Q WITH CAM!"
         mapView.addAnnotation(newAnnotation)
         
-        
         //this is just to center the map on our test point
-        var testLocation = CLLocation(latitude: venue["lat"]!, longitude: venue["lon"]!)
+        let testLocation = CLLocation(latitude: venue["lat"]!, longitude: venue["lon"]!)
         centerMapOnLocation(location: testLocation)
         
     }

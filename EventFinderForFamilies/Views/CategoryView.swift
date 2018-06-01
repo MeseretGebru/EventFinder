@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SnapKit
 class CategoryView: UIView {
     
     lazy var collectionView: UICollectionView = {

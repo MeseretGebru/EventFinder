@@ -14,7 +14,7 @@ struct Event : Codable {
     let created: Int?
     let fee : Fee?
     let venue : Venue?
-    let group : Group
+    let group : Group?
     let id: String
     let name : String
     let status: String?
@@ -45,7 +45,8 @@ struct Group :Codable {
     let join_mode: String
     let lat: Double
     let lon: Double
-    let urlname: String
+    let photo: Photo?
 }
+
 
 

@@ -14,7 +14,7 @@ import  MapKit
 class LocationService: NSObject {
     
     var locationView = LocationView()
-    //BP: Apple highly recommends having one instance of the location manager
+    // Apple highly recommends having one instance of the location manager
     private override init(){
         super.init()
         
@@ -37,26 +37,35 @@ extension LocationService {
         var status: CLAuthorizationStatus!
         
         //check if location services are enabled
-        if CLLocationManager.locationServicesEnabled(){
+        if CLLocationManager.locationServicesEnabled() {
             switch CLLocationManager.authorizationStatus(){
             case .notDetermined: //initial state on first launch
                 print("not detirmined")
+                status = .notDetermined
                 locationManager.requestWhenInUseAuthorization()
             case .denied: //user could potentially deny access
                 print("denied")
+                status = .denied
+                locationManager.requestWhenInUseAuthorization()
             case .authorizedAlways:
                 print("authorized always")
+                status = CLLocationManager.authorizationStatus()
+                locationManager.startUpdatingLocation()
             case .authorizedWhenInUse:
                 print("authorizedWhenInUse")
+                status = CLLocationManager.authorizationStatus()
+                locationManager.startUpdatingLocation()
             default:
                 break
             }
         }
         else {
             //TODO: - update UI accordingly
-            status = CLLocationManager.authorizationStatus()
+            status = .denied
+            return status
+            //status = CLLocationManager.authorizationStatus()
         }
-        status = CLLocationManager.authorizationStatus()
+        //status = CLLocationManager.authorizationStatus()
         return status
     }
 }

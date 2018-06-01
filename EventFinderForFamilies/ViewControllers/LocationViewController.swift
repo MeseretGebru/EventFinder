@@ -13,62 +13,54 @@ import CoreLocation
 
 
 class LocationViewController: UIViewController {
- /*   let locationView = LocationView()
-//    var currentSelectedEvent = Event!
+ 
+    let locationView = LocationView()
+    let upComingEventView = UpComingEventView()
+    
+    var idCategory: Int?
     
     private var annotations = [MKAnnotation]()
     var pinAnnotationView: MKPinAnnotationView!
-    
-    var currentSelectedIndex: Int = 0 {
-        didSet{
-            //let titleAtSelectedIndex = locationView//boroughArray[currentSelectedIndex]
-            let loadEvents: ([Event]) -> Void = {(onlineEvents:[Event]) in
-                DispatchQueue.main.async {
-                    self.events.removeAll()
-                    self.locationView.mapView.removeAnnotations(self.annotations)
-                    self.annotations.removeAll()
-                    self.events = onlineEvents
-                    if self.events.isEmpty{
-                        self.noEventAlert()
-                    }
-                }
-            }
-            EventAPIClient.manager.getEvents(catId: 22, lat: eventLatitude, lon: eventLongitude, radius: 50, completionHandler: onlineEvent, errorHandler: {print($0)})
-                
-                
-                        }
-    }
-    
-    var events = [Event](){
+    var currentSelectedEvent : Event!
+    var events : [Event] = []{
         didSet{
             // creating annotations
+            upComingEventView.tableView.reloadData()
+            var annotations : [MKAnnotation] = []
             for event in events {
-                guard let eventLatitude = event.venue?.lat,
-                    let eventLongitude = event.venue?.lon ,
-                 //   let doubleLat = eventLatitude,
-                  //  let doubleLong = eventLongitude else {continue}
-                
-      //          let annotation = MKPointAnnotation()
-      //          annotation.coordinate = CLLocationCoordinate2DMake(doubleLat, doubleLong)
-    //            annotation.title = event.name //this is the name that will show right unser the pin
-     //           annotations.append(annotation)
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = CLLocationCoordinate2D(latitude: (event.venue?.lat)!, longitude: (event.venue?.lon)!)
+                annotation.title = event.name //this is the name that will show right unser the pin
+                annotations.append(annotation)
             }
             // adding annotations to mapview - update ui
             DispatchQueue.main.async {
                 self.locationView.mapView.addAnnotations(self.annotations)
                 self.locationView.mapView.showAnnotations(self.annotations, animated: true)
+                
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.addSubview(locationView)
         setupNavBar()
         askUserForPermission()
+        setupLocationServices()
         locationView.mapView.delegate = self
-        
-        
+       // upComingEventView.tableView.dataSource = self
+       // upComingEventView.tableView.delegate = self
+       // LocationService.manager.delegate = self
+        loadData()
+        locationView.mapView.register(MKAnnotationView.self, forAnnotationViewWithReuseIdentifier: "mapAnnotationView")
+    }
+    func loadData(){
+        //"lat": 40.7851676940918, "lon": -73.94332122802734
+        EventAPIClient.manager.getEvents(catId: idCategory!, lat: 40.7851676940918, lon: -73.94332122802734, radius: 50, completionHandler: { (arrEvents) in
+            self.events = arrEvents
+        }, errorHandler: {print($0)})
     }
     
     
@@ -77,8 +69,10 @@ class LocationViewController: UIViewController {
     }
     
     func setupNavBar(){
-        navigationItem.title = "One-Stop-Shop"
+        navigationItem.title = "Location View"
         //Add right bar button
+    }
+    func setupLocationServices(){
         
     }
 }
@@ -106,8 +100,8 @@ extension LocationViewController: MKMapViewDelegate{
             eventAnnotationView?.canShowCallout = true
             
             let index = annotations.index{$0 === annotation}
-            
-            if let annotationIndex = index {
+            //annotationIndex
+            if let _ = index {
                 //let jobCenter = jobCenters[annotationIndex]
     //            eventAnnotationView?.glyphText =
                 //jobCenterAnnotationView?.image = #imageLiteral(resourceName: "orangeImage").reDrawImage(using: CGSize(width: 50, height: 50))//image is there.. It's just greyed out
@@ -129,7 +123,8 @@ extension LocationViewController: MKMapViewDelegate{
         let index = annotations.index{$0 === view.annotation}
         guard let annotationIndex = index else { print("index is nil"); return }
         let event = events[annotationIndex]
- //       currentSelectedEvent = event
+        
+        currentSelectedEvent = event
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
@@ -143,13 +138,13 @@ extension LocationViewController: MKMapViewDelegate{
 //MARK: alerts
 extension LocationViewController {
     func noEventAlert(){
-        let alertController = UIAlertController(title: "No Job Centers",
-                                                message:"There are no job centers in this zipcode. Please search another zipcode",
+        let alertController = UIAlertController(title: "No Events",
+                                                message:"There are no events in this this area",
                                                 preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) //for other actions add in actions incompletion{}
         alertController.addAction(okAction)
         //present alert controller
         self.present(alertController, animated: true, completion: nil)
     }
-    */
+ 
 }

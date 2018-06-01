@@ -16,7 +16,7 @@ class LocationView: UIView {
 
     lazy var mapView: MKMapView = {
         let map = MKMapView()
-        map.showsUserLocation = true
+        map.showsUserLocation = true //shows users current location
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString("New York, New York", completionHandler: { (placemark, error) in
             if let placemark = placemark {
@@ -24,11 +24,11 @@ class LocationView: UIView {
                 let lat = location.coordinate.latitude
                 let long = location.coordinate.longitude
                 map.setCenter(location.coordinate, animated: true)
-                
                 //numbers are in meters
                 //this sets the center that is zoomed in around your location
                 let region = MKCoordinateRegionMakeWithDistance(location.coordinate, 15000, 15000)
                 map.setRegion(region, animated: true)
+                
             }
         })
         return map
