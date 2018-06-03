@@ -79,7 +79,7 @@ class UpComingEventTableViewCell: UITableViewCell {
                 self.eventImage.image = imageOnline
             }
         } else {
-            self.eventImage.image = #imageLiteral(resourceName: "Active")
+            self.eventImage.image = #imageLiteral(resourceName: "no image")
         }
     }
 }

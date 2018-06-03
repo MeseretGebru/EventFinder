@@ -162,6 +162,13 @@ extension UpComingEventsViewController: UITableViewDelegate,UITableViewDataSourc
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedEvent = upComingEvents[indexPath.row]
+        let detailVC = DetailViewController()
+        detailVC.event = selectedEvent
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 //---------------------------
 //MARK: Maps delegate functions
@@ -178,10 +185,10 @@ extension UpComingEventsViewController: MKMapViewDelegate{
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
-        //present the detail view controller
-        //        let detailVC = DetailViewController(jobCenter: currentSelectedJobCenter)
-        //        navigationController?.pushViewController(detailVC, animated: true)
-        //        print("This is going to the List View Controller")
+//        //present the detail view controller
+//                let detailVC = DetailViewController(event: selectedEvent)
+//                navigationController?.pushViewController(detailVC, animated: true)
+        
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

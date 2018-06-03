@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import CoreLocation
+
 struct AllEvent : Codable {
     let events: [Event]
 }
@@ -16,7 +18,7 @@ struct Event : Codable {
     let venue : Venue?
     let group : Group?
     let id: String
-    let name : String
+    let name : String?
     let status: String?
     let local_date: String?
     let local_time: String?
@@ -37,16 +39,22 @@ struct Venue: Codable {
     let city: String
     let zip : String?
     let state:String?
+    let phone: String?
 }
 struct Group :Codable {
     let created: Int
     let name: String
     let id: Int
     let join_mode: String
-    let lat: Double
-    let lon: Double
+    let lat: Double?
+    let lon: Double?
     let photo: Photo?
+
+    var coordinate: CLLocationCoordinate2D {
+//    guard let lat = lat, let lon = lon else {return CLLocationCoordinate2DMake(0.0, 0.0)}
+     //   guard let latDouble = Double(lat!), let longDouble = Double(lon!) else {return CLLocationCoordinate2DMake(0.0, 0.0)}
+        return CLLocationCoordinate2DMake(lat!, lon!)
+    
+  }
+
 }
-
-
-

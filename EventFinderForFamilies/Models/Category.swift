@@ -8,17 +8,6 @@
 
 import Foundation
 
-//struct Result: Codable {
-//    let results: [Category]
-//}
-//
-//struct Category: Codable {
-//    let name: String          //"name": "Arts & Culture",
-//    let sort_name: String    //"sort_name": "Arts & Culture",
-//    let id: Int             //"id": 1,
-//    let shortname: String  //"shortname": "Arts"
-//
-//}
 
 struct Category: Codable {
     let id : Int
