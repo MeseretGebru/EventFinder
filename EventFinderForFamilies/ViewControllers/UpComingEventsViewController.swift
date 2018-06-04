@@ -16,6 +16,7 @@ class UpComingEventsViewController: UIViewController {
     let upComingEventsView = UpComingEventView()
     let locationView = LocationView()
     var annotations = [MKAnnotation]()
+    var selectedEventmap : Event!
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -142,33 +143,33 @@ extension UpComingEventsViewController: UITableViewDelegate,UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let upComingEvent = upComingEvents[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell") as! UpComingEventTableViewCell
-//        cell.eventImage.image = nil
-//
-//        cell.eventName.text = upComingEvent.name
-//        cell.venueName.text = upComingEvent.venue?.name
-        
         cell.configureCell(event: upComingEvent)
-//        print("\(upComingEvent.name): \(upComingEvent.group?.photo?.photo_link ?? "No Image")")
-        
-//        if let photoLink = upComingEvent.group?.photo?.photo_link {
-//            ImageService.manager.getImage(from: photoLink) { (imageOnline) in
-//                cell.eventImage.image = imageOnline
-//            }
-//        } else {
-//            cell.eventImage.image = #imageLiteral(resourceName: "Active")
-//        }
-        
+       /* cell.eventImage.image = nil
+        cell.eventName.text = upComingEvent.name
+        cell.venueName.text = upComingEvent.venue?.name
+        if let photoLink = upComingEvent.group?.photo?.photo_link {
+            ImageService.manager.getImage(from: photoLink) { (imageOnline) in
+                cell.eventImage.image = imageOnline
+            }
+        } else {
+            cell.eventImage.image = #imageLiteral(resourceName: "Active")
+        } */
         cell.setNeedsLayout()
-        
         return cell
     }
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedEvent = upComingEvents[indexPath.row]
-        let detailVC = DetailViewController()
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
         detailVC.event = selectedEvent
         navigationController?.pushViewController(detailVC, animated: true)
     }
+    
+    
+    
 }
 //---------------------------
 //MARK: Maps delegate functions
@@ -176,19 +177,28 @@ extension UpComingEventsViewController: MKMapViewDelegate{
     //similar to didSelect in tableviews
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         //find the place selected and set that place to be the current place
-       // let index = annotations.index{$0 === view.annotation}
-       // guard let annotationIndex = index else { print("index is nil"); return }
-        ////// let event = events[annotationIndex]
+     let index = annotations.index{$0 === view.annotation}
+       guard let annotationIndex = index else { print("index is nil"); return }
+        let eventmap = upComingEvents[annotationIndex]
         
-        //////  currentSelectedEvent = event
+       selectedEventmap = eventmap
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    /**********here is new thing happening********/
+       // present the detail view controller
         
-//        //present the detail view controller
-//                let detailVC = DetailViewController(event: selectedEvent)
-//                navigationController?.pushViewController(detailVC, animated: true)
         
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        detailVC.event = selectedEventmap
+        navigationController?.pushViewController(detailVC, animated: true)
+        
+        
+        
+        
+        
+      /**********here is end of new thing happening********/
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -203,7 +213,6 @@ extension UpComingEventsViewController: MKMapViewDelegate{
         eventAnnotationView?.canShowCallout = true
         eventAnnotationView?.annotation = annotation
         eventAnnotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-
         return eventAnnotationView
     }
 }

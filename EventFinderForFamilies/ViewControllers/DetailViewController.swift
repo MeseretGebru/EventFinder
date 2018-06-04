@@ -28,7 +28,7 @@ class DetailViewController: UITableViewController {
         // set a zero height view for the footer to remove empty cells
         tableView.tableFooterView = UIView(frame: .zero)
         configureView()
-         navigationController?.title = "Detailed"
+         
     }
     
     
@@ -46,20 +46,26 @@ class DetailViewController: UITableViewController {
 
     
     func configureView() {
-        guard let eventLabel.text = event.name! else { return }
+         eventLabel.text = event.name!
+         nameLabel.text = (event.venue?.name) 
 
-        guard let nameLabel.text = (event.venue?.name) else {return}
-       
         addressLabel.text = event.venue?.address_1
         phoneLabel.text = event.venue?.phone
         
          //set the center of the map to New York
         let annotation = MKPointAnnotation()
-        annotation.coordinate = CLLocationCoordinate2DMake(40.6974034,-74.1197636)
-
+       // annotation.coordinate = CLLocationCoordinate2DMake(40.6974034,-74.1197636)
+        guard let lat = event.venue?.lat,
+            let lon = event.venue?.lon
+            else { print("no coordinates"); return }
+        annotation.coordinate = CLLocationCoordinate2DMake(lat, lon)
         mapView.setCenter(annotation.coordinate, animated: true)
         mapView.addAnnotation(annotation)
-
+        mapView.showAnnotations([annotation], animated: true)
+       //mapView.centerCoordinate = event.venue.coordinate
+        //mapView.isScrollEnabled = false
+      
+        /*******end of new********/
     }
    
     
