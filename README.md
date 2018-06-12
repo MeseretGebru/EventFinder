@@ -61,7 +61,7 @@ Then, run the following command in Terminal:
 `$ pod install`
 
 ## API Endpoints
-### FourSquare API
+### Meetup API
 - [MeetUp API Event Search](https://www.meetup.com/meetup_api/docs/:urlname/events/#list)
 
 
